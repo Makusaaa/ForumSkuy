@@ -13,11 +13,14 @@
         <a href="index.php" class="backbutton">←</a>
         <p class="user"><?=$_SESSION["username"]?></p>
         <img src="src/<?=$_SESSION["picture"]?>" alt="">
-        <form action="controller/Changeprofpic.php" method="POST" enctype="multipart/form-data">
+        <form action="controller/ProfileController.php?changeprofpic" method="POST" enctype="multipart/form-data">
             <label for="img" class="profilebutton">Change Profile Picture</label>
             <input type="file" onchange="form.submit()" id="img" name="img" style="display:none">
         </form>
-        <a class="profilebutton" href="controller/Logout.php">Log Out</a>
+        <a class="profilebutton" href="controller/AuthController.php?logout">Log Out</a>
     </div>
+    <?php if(isset($_SESSION["error-message"])){ ?>
+        <p style="margin-top:28px;;margin-bottom:-30px;text-align:center"><?=$_SESSION["error-message"]?></p>
+    <?php   unset($_SESSION["error-message"]); } ?>
 </body>
 </html>

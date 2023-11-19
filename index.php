@@ -28,7 +28,7 @@
             <div class="profbutt">
                 <div>
                     <p><?= $_SESSION["username"]?></p>
-                    <a href="controller/Logout.php">Log Out</a>
+                    <a href="controller/AuthController.php?logout">Log Out</a>
                 </div>
                 <a href="profile.php" class="profpic"><img src="src/<?=$_SESSION["picture"]?>" alt="icon"></a>
             </div>
@@ -39,7 +39,7 @@
         </div>
     </nav>
     <?php if(@$_SESSION["isLogin"]){?>
-        <form class="makepostbox" action="controller/Createpost.php" method="POST">
+        <form class="makepostbox" action="controller/PostController.php?createpost" method="POST">
             <b>Create a post!</b>
             <input type="text" name="title" id="title" placeholder="Your title" cols="45" rows="5">
             <textarea type="text" name="content" id="content" placeholder="Write something up...."></textarea>
