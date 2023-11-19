@@ -1,14 +1,10 @@
 <?php
     session_start();
-    $con = mysqli_connect('localhost', 'root', '', 'forumskuy', 3306);
-    $data = [];
+    require "./controller/connection.php";
 
-    if ($con->error){
-        echo $con->error;
-    }else{
-        $result = $con->query("SELECT * FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
-        while($row = $result->fetch_assoc()) array_push($data, $row);
-    }
+    $data = [];
+    $result = $db->query("SELECT * FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
+    while($row = $result->fetch_assoc()) array_push($data, $row);
 ?>
 
 <!DOCTYPE html>
