@@ -16,6 +16,7 @@
         }
 
         if($validate==1){
+            //prepare statement to get result from database
             $query = "SELECT * FROM users WHERE username=? AND password=?;";
             $statement = $db->prepare($query);
             $statement->bind_param("ss",$username,$password);
