@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/style.css">
         <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-condensed" rel="stylesheet">
         <title>Login</title>
     </head>
