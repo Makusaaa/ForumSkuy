@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 08:16 PM
+-- Generation Time: Nov 19, 2023 at 08:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,9 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `userid`, `commentid`, `content`, `datetime`) VALUES
 (1, 1, 13, 'hahahahaha', '2023-11-19 19:59:21'),
 (2, 9, 13, 'apaan si ketawa2 sendiri di post sendiri', '2023-11-19 20:13:39'),
-(3, 5, 13, 'tau dah kucing ga jelas, mending berobat sana pake petaholic', '2023-11-19 20:15:25');
+(3, 5, 13, 'tau dah kucing ga jelas, mending berobat sana pake petaholic', '2023-11-19 20:15:25'),
+(4, 6, 13, 'teman temannkuu sudah nikahhh.... aku masihh nonton spongeeebobbb', '2023-11-19 20:18:26'),
+(5, 4, 13, 'ini fitur comments ga ada faedahnya woi', '2023-11-19 20:19:54');
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ INSERT INTO `posts` (`id`, `userid`, `title`, `content`, `datetime`) VALUES
 (9, 1, 'awikwok', 'AHAHAHAHHAHAHAHAHAHAHAAHAH SEC PROG GAS', '2023-11-19 16:06:21'),
 (11, 9, 'HEHEHEHE', 'XSS bisa nih di web ini', '2023-11-19 18:05:02'),
 (12, 1, 'dsaasddsaads', 'dsaasddsadsaadsdas', '2023-11-19 18:17:07'),
-(13, 1, 'dsadsa', 'dsadsa', '2023-11-19 19:51:42');
+(13, 1, 'Wuadidadiwudidaww', 'Pergi ke pasar beli jambu', '2023-11-19 19:51:42');
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posts`
