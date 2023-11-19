@@ -2,9 +2,11 @@
     session_start();
     require "./controller/connection.php";
 
-    $data = [];
-    $result = $db->query("SELECT * FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
-    while($row = $result->fetch_assoc()) array_push($data, $row);
+    $postdata = $commentdata = [];
+    $result1 = $db->query("SELECT picture, username, datetime, title, content, a.id AS commentid FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
+    $result2 = $db->query("SELECT picture, username, datetime, content, commentid FROM comments a JOIN users b ON b.id = a.userid ORDER BY datetime ASC");
+    while($row = $result1->fetch_assoc()) array_push($postdata, $row);
+    while($row = $result2->fetch_assoc()) array_push($commentdata, $row);
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +37,15 @@
         </div>
     </nav>
     <?php if(@$_SESSION["isLogin"]){?>
-        <form class="makepostbox" action="controller/PostController.php?createpost" method="POST">
+        <form class="makepostbox" action="controller/PostController.php" method="POST">
             <b>Create a post!</b>
             <input type="text" name="title" id="title" placeholder="Your title" cols="45" rows="5">
             <textarea type="text" name="content" id="content" placeholder="Write something up...."></textarea>
-            <button type="submit">Post!</button>
+            <button type="submit" name="createpost">Post!</button>
         </form>
     <?php } ?>
 
-    <?php foreach($data as $d){?>
+    <?php foreach($postdata as $d){?>
     <div class="postbox">
         <div class="postprofile">
             <img src="src/<?=$d["picture"]?>" alt="icon">
@@ -56,6 +58,44 @@
             <b><?=$d["title"]?></b>
             <p><?=$d["content"]?></p>
         </div>
+        <?php
+            $commentlist = [];
+            $count = 0;
+            foreach($commentdata as $c){
+                if($c["commentid"] == $d["commentid"]){
+                    array_push($c, $commentlist);
+                    $count += 1;
+                }
+            }
+            if($count > 0){ ?>
+                <hr>
+                <div class="postcomment">
+                    <p>Comments (<?=$count?>)</p>
+                    <?php foreach($commentdata as $cd){ ?>
+                        <div class="commentitem">
+                            <img src="src/<?=$cd["picture"]?>" alt="icon">
+                            <div>
+                                <div class="commentsender">
+                                    <p class="commentusername"><?=$cd["username"]?></p>
+                                    <p class="commentdatetime"><?=$cd["datetime"]?></p>
+                                </div>
+                                <p class="commentcontent"><?=$cd["content"]?></p>
+                            </div>
+                        </div>
+                    <?php   } ?>
+                    </div>
+            <?php } ?>
+        <?php if(@$_SESSION["isLogin"]){ ?>
+            <hr>
+            <div class="commentinput">
+                <form class="commentitem" action="controller/PostController.php" method="POST">
+                    <input type="hidden" name="commentid" value="<?=$d["commentid"]?>">
+                    <img src="src/<?=$_SESSION["picture"]?>" alt="icon">
+                    <textarea type="text" name="content" id="content" placeholder="Reply something..."></textarea>
+                    <button type="submit" name="createcomment">↗</button>
+                </form>
+            </div>
+        <?php } ?>
     </div>
     <?php }?>
 </body>
