@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION["isLogin"]) || $_SESSION["isLogin"] == false){
+    if($_SESSION["isLogin"] == false){
         header("Location: ../index.php");
     }
 ?>
