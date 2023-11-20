@@ -55,15 +55,15 @@
             </div>
         </div>
         <div class="postcontent">
-            <b><?=$d["title"]?></b>
-            <p><?=$d["content"]?></p>
+            <b><?=htmlspecialchars($d["title"])?></b>
+            <p><?=htmlspecialchars($d["content"])?></p>
         </div>
         <?php
             $commentlist = [];
             $count = 0;
             foreach($commentdata as $c){
                 if($c["commentid"] == $d["commentid"]){
-                    array_push($c, $commentlist);
+                    array_push($commentlist, $c);
                     $count += 1;
                 }
             }
@@ -71,7 +71,7 @@
                 <hr>
                 <div class="postcomment">
                     <p>Comments (<?=$count?>)</p>
-                    <?php foreach($commentdata as $cd){ ?>
+                    <?php foreach($commentlist as $cd){ ?>
                         <div class="commentitem">
                             <img src="src/<?=$cd["picture"]?>" alt="icon">
                             <div>
@@ -79,7 +79,7 @@
                                     <p class="commentusername"><?=$cd["username"]?></p>
                                     <p class="commentdatetime"><?=$cd["datetime"]?></p>
                                 </div>
-                                <p class="commentcontent"><?=$cd["content"]?></p>
+                                <p class="commentcontent"><?=htmlspecialchars($cd["content"])?></p>
                             </div>
                         </div>
                     <?php   } ?>
