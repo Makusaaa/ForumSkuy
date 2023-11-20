@@ -17,21 +17,26 @@
 
         if($validate==1){
             //prepare statement to get result from database
-            $query = "SELECT * FROM users WHERE username=? AND password=?;";
+            $query = "SELECT id, username, password FROM users WHERE username=?;";
             $statement = $db->prepare($query);
-            $statement->bind_param("ss",$username,$password);
+            $statement->bind_param("s",$username);
             $statement->execute();
             $result = $statement->get_result();
             $db->close();
             if ($result->num_rows === 1){
-                echo "<script> alert() </script>";
-                $row = $result->fetch_assoc();
-                $_SESSION["isLogin"] = true;
-                $_SESSION["username"] = $row["username"];
-                $_SESSION["picture"] = $row["picture"];
-                $_SESSION["id"] = $row["id"];
-                header("Location: ../index.php");
-                exit();
+              $row = $result->fetch_assoc();
+              if(password_verify($password, $row['password'])){
+                  echo "<script> alert('Login success') </script>";
+                  $_SESSION["isLogin"] = true;
+                  $_SESSION["username"] = $row["username"];
+                  $_SESSION["picture"] = $row["picture"];
+                  $_SESSION["id"] = $row["id"];
+                  header("Location: ../index.php");
+                  exit();
+              }
+              else{
+                  $error = 'Wrong Username and Password';
+              }
             }
             $error = 'Wrong Username and Pasword!';
         }
@@ -59,7 +64,7 @@
         }
 
         if($validate==1){
-            $query = "SELECT * FROM users WHERE username=?";
+            $query = "SELECT username FROM users WHERE username=?";
             $statement = $db->prepare($query);
             $statement->bind_param("s",$username);
             $statement->execute();
@@ -67,9 +72,10 @@
             if($result->num_rows === 1){
                 $error ='Username taken!';
             }else{
-                $query = "INSERT INTO users (`id`,`username`, `password`,`picture`) VALUES (NULL,?,?,'default.jpg');";
+                $hashPass = password_hash($password, PASSWORD_BCRYPT);
+                $query = "INSERT INTO users (`username`, `password`,`picture`) VALUES (?,?,'default.jpg');";
                 $statement = $db->prepare($query);
-                $statement->bind_param("ss",$username,$password);
+                $statement->bind_param("ss",$username,$hashPass);
                 $statement->execute();
                 $db->close();
                 header("Location: ../index.php");
@@ -83,5 +89,6 @@
     }else if(isset($_GET['logout'])){
         session_destroy();
         header("Location: ../index.php");
+        exit();
     }
 ?>
