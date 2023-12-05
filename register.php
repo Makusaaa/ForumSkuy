@@ -14,13 +14,9 @@
 </head>
 <body>
     <form class="logbar" action="/controller/AuthController.php" method="POST"> 
-        <img src="src/logo.png" alt="">   
-        <input type="text" name="username" placeholder="Username" value="<?php if(isset($_SESSION["username-input"])){
-                                                                                    echo $_SESSION["username-input"];
-                                                                                    unset($_SESSION["username-input"]);} ?>">
-        <input type="password" name="password" placeholder="Password" value="<?php if(isset($_SESSION["password-input"])){
-                                                                                    echo $_SESSION["password-input"];
-                                                                                    unset($_SESSION["password-input"]);} ?>">
+        <img src="src/logo.png" alt="">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
         <button type="submit" name="register"><b>Register</b></button>
     </form>
     <?php if(isset($_SESSION["error-message"])){ ?>
