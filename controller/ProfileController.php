@@ -1,11 +1,17 @@
 <?php
     session_start();
     require("./connection.php");
+    require("./csrf.php");
 
     if(isset($_GET["changeprofpic"])){
         $attachment = $_FILES['img'];
         $fileinfo = pathinfo($attachment["name"]);
         $extension = $fileinfo['extension'];
+        $csrf_token = $_POST["csrf-token"];
+        if(!checkCSRF($csrf_token)){
+            header("Location: ../profile.php");
+            exit;
+        }
         
         if(in_array($extension,['jpg','png','jpeg','webp'])){
             $newfilename = strtolower($_SESSION["username"]).".".$extension;

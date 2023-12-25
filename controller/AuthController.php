@@ -1,8 +1,15 @@
 <?php
     session_start();
     require "./connection.php";
+    require "./csrf.php";
 
     if(isset($_POST['login'])){
+        $csrf_token = $_POST["csrf-token"];
+        if(!checkCSRF($csrf_token)){
+            header("Location: ../login.php");
+            exit;
+        }
+
         $username = $_POST["username"];
         $password = $_POST["password"];
         $validate = 1;
@@ -40,6 +47,11 @@
         $_SESSION["error-message"] = $error;
         header("Location: ../login.php");
     }else if(isset($_POST['register'])){
+        $csrf_token = $_POST["csrf-token"];
+        if(!checkCSRF($csrf_token)){
+            header("Location: ../register.php");
+            exit;
+        }
         $username = $_POST["username"];
         $password = $_POST["password"];
         $validate = 1;
@@ -81,6 +93,11 @@
         $_SESSION["error-message"] = $error;
         header("Location: ../register.php");
     }else if(isset($_GET['logout'])){
+        $csrf_token = $_GET["csrf-token"];
+        if(!checkCSRF($csrf_token)){
+            header("Location: ../index.php");
+            exit;
+        }
         session_destroy();
         header("Location: ../index.php");
     }

@@ -3,6 +3,8 @@
     if($_SESSION["isLogin"] == false){
         header("Location: ../index.php");
     }
+    require "./controller/csrf.php";
+    generateCSRF();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +19,7 @@
         <p class="user"><?=$_SESSION["username"]?></p>
         <img src="src/<?=$_SESSION["picture"]?>" alt="">
         <form action="controller/ProfileController.php?changeprofpic" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf-token" id="csrf-token" value="<?=$_SESSION["csrf-token"]?>">
             <label for="img" class="profilebutton">Change Profile Picture</label>
             <input type="file" onchange="form.submit()" id="img" name="img" style="display:none">
         </form>

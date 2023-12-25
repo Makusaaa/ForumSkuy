@@ -1,14 +1,16 @@
 <?php
     session_start();
     require("./connection.php");
+    require("./csrf.php");
 
     if(isset($_POST["createpost"])){
         $userid = $_SESSION["id"];
         $title = $_POST["title"];
         $content = $_POST["content"];
         $datetime = date('Y-m-d H:i:s');
+        $csrf_token = $_POST["csrf-token"];
 
-        if(strlen($title)==0 || strlen($content)==0){
+        if(strlen($title)==0 || strlen($content)==0 || !checkCSRF($csrf_token)){
             header("Location: ../index.php");
         }else{
             $query = "INSERT INTO `posts`(`id`, `userid`, `title`, `content`, `datetime`) VALUES (NULL,?,?,?,?);";

@@ -1,6 +1,8 @@
 <?php
     session_start();
     require "./controller/connection.php";
+    require "./controller/csrf.php";
+    generateCSRF();
 
     $postdata = $commentdata = [];
     $result1 = $db->query("SELECT picture, username, datetime, title, content, a.id AS commentid FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
@@ -26,7 +28,7 @@
             <div class="profbutt">
                 <div>
                     <p><?= $_SESSION["username"]?></p>
-                    <a href="controller/AuthController.php?logout">Log Out</a>
+                    <a href="controller/AuthController.php?logout=1&csrf-token=<?=$_SESSION["csrf-token"]?>">Log Out</a>
                 </div>
                 <a href="profile.php" class="profpic"><img src="src/<?=$_SESSION["picture"]?>" alt="icon"></a>
             </div>
@@ -39,6 +41,7 @@
     <?php if(@$_SESSION["isLogin"]){?>
         <form class="makepostbox" action="controller/PostController.php" method="POST">
             <b>Create a post!</b>
+            <input type="hidden" name="csrf-token" id="csrf-token" value="<?=$_SESSION["csrf-token"]?>">
             <input type="text" name="title" id="title" placeholder="Your title" cols="45" rows="5">
             <textarea type="text" name="content" id="content" placeholder="Write something up...."></textarea>
             <button type="submit" name="createpost">Post!</button>

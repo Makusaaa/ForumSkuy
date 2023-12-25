@@ -3,6 +3,8 @@
     if(isset($_SESSION["isLogin"]) && $_SESSION["isLogin"]){
         header("Location: ../index.php");
     }
+    require "./controller/csrf.php";
+    generateCSRF();
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +16,8 @@
 </head>
 <body>
     <form class="logbar" action="/controller/AuthController.php" method="POST"> 
-        <img src="src/logo.png" alt="">   
+        <img src="src/logo.png" alt="">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="<?=$_SESSION["csrf-token"]?>">
         <input type="text" name="username" placeholder="Username" value="<?php if(isset($_SESSION["username-input"])){
                                                                                     echo $_SESSION["username-input"];
                                                                                     unset($_SESSION["username-input"]);} ?>">
