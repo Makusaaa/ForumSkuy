@@ -24,6 +24,7 @@
         <input type="password" name="password" placeholder="Password" value="<?php if(isset($_SESSION["password-input"])){
                                                                                     echo $_SESSION["password-input"];
                                                                                     unset($_SESSION["password-input"]);} ?>">
+        <p>Already have an account?<a href="./login.php"> login</a> here!</p>
         <button type="submit" name="register"><b>Register</b></button>
     </form>
     <?php if(isset($_SESSION["error-message"])){ ?>

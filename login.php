@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION["isLogin"]) && $_SESSION["isLogin"]){
-        header("Location: ../index.php");
+        header("Location: ./index.php");
     }
     require "./controller/csrf.php";
     generateCSRF();
@@ -24,10 +24,11 @@
             <input type="password" name="password" placeholder="Password" value="<?php if(isset($_SESSION["password-input"])){
                                                                                     echo $_SESSION["password-input"];
                                                                                     unset($_SESSION["password-input"]);} ?>">
+            <p>Doesn't have account?<a href="./register.php"> register</a> here!</p>
             <button type="submit" name="login"><b>Login</b></button>
         </form>
         <?php if(isset($_SESSION["error-message"])){ ?>
-            <p style="margin-top:28px;;margin-bottom:-30px;text-align:center"><?=$_SESSION["error-message"]?></p>
+            <p style="margin-top:28px;;margin-bottom:-30px;text-align:center; color: red;"><?=$_SESSION["error-message"]?></p>
         <?php   unset($_SESSION["error-message"]); } ?>
     </body>
 </html>

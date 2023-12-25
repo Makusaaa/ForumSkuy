@@ -1,7 +1,7 @@
 <?php
     session_start();
     if($_SESSION["isLogin"] == false){
-        header("Location: ../index.php");
+        header("Location: ./index.php");
     }
     require "./controller/csrf.php";
     generateCSRF();
