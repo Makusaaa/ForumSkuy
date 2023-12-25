@@ -14,7 +14,7 @@
         }
         
         if(in_array($extension,['jpg','png','jpeg','webp'])){
-            $newfilename = strtolower($_SESSION["username"]).".".$extension;
+            $newfilename = strtolower($_SESSION["username"]).uniqid().".".$extension;
             $target = "../src/".$newfilename;
             if($_SESSION["picture"] != "default.jpg"){
                 unlink("../src/".$_SESSION["picture"]);
