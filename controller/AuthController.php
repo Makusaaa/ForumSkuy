@@ -147,5 +147,7 @@
         session_destroy();
         header("Location: ../login.php");
         exit();
+    }else{
+        header("Location: ../index.php");
     }
 ?>

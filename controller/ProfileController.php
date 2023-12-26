@@ -40,5 +40,7 @@
         }
         $_SESSION["error-message"] = $error;
         header("Location: ../profile.php");
+    }else{
+        header("Location: ../index.php");
     }
 ?>
