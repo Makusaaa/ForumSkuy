@@ -75,11 +75,10 @@
                         $_SESSION["id"] = $row["id"];
                         header("Location: ../index.php");
                         exit();
-                    }else{
-                        logInvalidLoginAttempt();
-                        $error = 'Wrong Username and Pasword!';
                     }
                 }
+                logInvalidLoginAttempt();
+                $error = 'Wrong Username and Pasword!';
             }
         }
         $_SESSION["username-input"] = $username;
