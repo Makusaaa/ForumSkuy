@@ -7,7 +7,7 @@
         if (!isset($_SESSION['login_attempts'])) {
             $_SESSION['login_attempts'] = 1;
         } else {
-            $_SESSION['login_attempts']++;
+            $_SESSION['login_attempts'] += 1;
         }
         
         $_SESSION['last_login_attempt'] = time();
@@ -31,16 +31,12 @@
         $password = $_POST["password"];
         $validate = 1;
 
-        if(!isset($_SESSION["login_attempts"])){
-            $_SESSION["login_attempts"]=0;
-        }
-
         if(!isset($_SESSION["last_login_attempt"])){
             $_SESSION["last_login_attempt"]=time();
         }
 
         if(isset($_SESSION["login_attempts"])){
-            if($_SESSION["login_attempts"] >=3 && (time() - $_SESSION["last_login_attempt"] > 60)){
+            if($_SESSION["login_attempts"] >=5 && (time() - $_SESSION["last_login_attempt"] > 60)){
                 $_SESSION["login_attempts"]=0;
             }
         }
@@ -57,7 +53,7 @@
         }
         
         if($validate==1){
-            if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 3) {
+            if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 5) {
                 $error = 'Too many attempt!, please wait for 1 minute';
                 header("Location: ../login.php");
             }else {
@@ -79,12 +75,11 @@
                         $_SESSION["id"] = $row["id"];
                         header("Location: ../index.php");
                         exit();
+                    }else{
+                        logInvalidLoginAttempt();
+                        $error = 'Wrong Username and Pasword!';
                     }
                 }
-                else{
-                    logInvalidLoginAttempt();
-                }
-                $error = 'Wrong Username and Pasword!';
             }
         }
         $_SESSION["username-input"] = $username;
