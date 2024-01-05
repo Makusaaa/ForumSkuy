@@ -23,7 +23,7 @@
             <label for="img" class="profilebutton">Change Profile Picture</label>
             <input type="file" onchange="form.submit()" id="img" name="img" style="display:none">
         </form>
-        <a class="profilebutton" href="controller/AuthController.php?logout">Log Out</a>
+        <a class="profilebutton" href="controller/AuthController.php?logout=1&csrf-token=<?=$_SESSION["csrf-token"]?>">Log Out</a>
     </div>
     <?php if(isset($_SESSION["error-message"])){ ?>
         <p style="margin-top:28px;;margin-bottom:-30px;text-align:center"><?=$_SESSION["error-message"]?></p>

@@ -61,7 +61,7 @@
                 $error = 'Too many attempt!, please wait for 1 minute';
                 header("Location: ../login.php");
             }else {
-                $query = "SELECT id, username, password FROM users WHERE username=?;";
+                $query = "SELECT id, username, password, picture FROM users WHERE username=?;";
                 $statement = $db->prepare($query);
                 $statement->bind_param("s",$username);
                 $statement->execute();
@@ -145,7 +145,7 @@
             exit;
         }
         session_destroy();
-        header("Location: ../login.php");
+        header("Location: ../index.php");
         exit();
     }else{
         header("Location: ../index.php");

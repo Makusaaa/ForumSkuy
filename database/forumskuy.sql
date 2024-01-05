@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 08:20 PM
+-- Generation Time: Jan 05, 2024 at 07:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -95,15 +95,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `picture`) VALUES
-(1, 'makusa', 'makusa', 'makusa.jpg'),
-(2, 'gegegimang', 'aaaaaaaa', 'default.jpg'),
-(3, 'timothy', 'timothy1', 'default.jpg'),
-(4, 'nathan', 'nathan123', 'nathan.jpg'),
-(5, 'hugocuandri', 'hugo123123', 'hugocuandri.png'),
-(6, 'agustinusleo', 'alealeale', 'agustinusleo.jpg'),
-(7, 'JoshuaRL', 'joshua123', 'joshuarl.jpeg'),
-(8, 'makusa1', '12345678', 'default.jpg'),
-(9, 'makusa2', '12345678', 'makusa2.jpg');
+(1, 'makusa', '$2a$12$47bWDP7L4Yf91ugBVtvR.upoCLMebIKit2BP2yZ2Mzf6AgnlvbAGK', 'makusa6589adf2231de.png'),
+(2, 'gegegimang', '$2a$12$Lo8dT8Xlj83f96SAzBCx4OxDRnDby6l8.zpV6mJAPNjfaIEjZtPuG', 'default.jpg'),
+(3, 'timothy', '$2a$12$Kw6N4mDg77xmeW6XLwNtreCwcXX64zyKyZuJ87WOX8Ru6LtkOCl6C', 'default.jpg'),
+(4, 'nathan', '$2a$12$JFrgLLAHJJ4Xd0Tb6KkUjO8X4o/rqNHkqAwhjgLY211hjm3lCbU7i', 'nathan.jpg'),
+(5, 'hugocuandri', '$2a$12$T/fwulFwC7pzeQwc/7ja8ei8Z9P1CKgjWCwGlStV1hKCy99jMyQyK', 'hugocuandri.png'),
+(6, 'agustinusleo', '$2a$12$yTRlh8DLQOOLkmc5Uex2FemMoi7Ikq4D5LhmwjEU/9EzXYVrFjF76', 'agustinusleo.jpg'),
+(7, 'JoshuaRL', '$2a$12$eKPaqkBxUN6IquztTkuKRezQYI2uazxcLxwnn1cYRj032H8UOmNM2', 'joshuarl.jpeg'),
+(8, 'makusa1', '$2a$12$ePH3fxzqhEkIOQd/6UwH2OaPyfCYAhUjRK1682aeS/PzJ7l.Hu1aO', 'default.jpg'),
+(9, 'makusa2', '$2a$12$ePH3fxzqhEkIOQd/6UwH2OaPyfCYAhUjRK1682aeS/PzJ7l.Hu1aO', 'makusa2.jpg'),
+(10, 'testing', '$2y$10$dOKmgIe/zV8j.QzGL.nlG.fQZYDx9kxocuDhJZI2Rd3Fd2rsmKiEO', 'default.jpg');
 
 --
 -- Indexes for dumped tables
@@ -147,7 +148,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
