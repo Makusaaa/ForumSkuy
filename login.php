@@ -3,6 +3,7 @@
     if(isset($_SESSION["isLogin"]) && $_SESSION["isLogin"]){
         header("Location: ../index.php");
     }
+    // var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
         <title>Login</title>
     </head>
     <body>
-        <form class="logbar" action="/controller/AuthController.php" method="POST"> 
+        <form class="logbar" action="./controller/AuthController.php" method="POST"> 
             <img src="src/logo.png" alt="">   
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">

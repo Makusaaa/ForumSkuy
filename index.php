@@ -1,12 +1,67 @@
 <?php
+    // // Prevents javascript XSS attacks aimed to steal the session ID
+    // ini_set('session.cookie_httponly', 1);
+
+    // // // Prevent Session ID from being passed through  URLs
+    // ini_set('session.use_only_cookies', 1);
+    
+    // // session_start();
+    // session_start(['cookie_lifetime' => 43200,'cookie_secure' => true,'cookie_httponly' => true]);
+
     session_start();
+    $exp = new DateTime("+1 hour");
+    var_dump($exp);
+    var_dump($exp->getTimestamp());
+
+    // Use $exp->getTimestamp() to get the expiration time as a timestamp
+    // setcookie('key', 'value');
+    setcookie('key', 'value', httponly:true );
+
+
     require "./controller/connection.php";
 
     $postdata = $commentdata = [];
-    $result1 = $db->query("SELECT picture, username, datetime, title, content, a.id AS commentid FROM posts a JOIN users b ON b.id = a.userid ORDER BY datetime DESC");
-    $result2 = $db->query("SELECT picture, username, datetime, content, commentid FROM comments a JOIN users b ON b.id = a.userid ORDER BY datetime ASC");
-    while($row = $result1->fetch_assoc()) array_push($postdata, $row);
-    while($row = $result2->fetch_assoc()) array_push($commentdata, $row);
+
+    var_dump($_SESSION);
+
+    $queryPost = "SELECT 
+                        picture,
+                        username, 
+                        datetime, 
+                        title, 
+                        content, 
+                        a.id AS commentid 
+                    FROM posts a 
+                    JOIN users b ON b.id = a.userid 
+                    ORDER BY datetime DESC";
+
+    $queryComment = "SELECT 
+                        picture, 
+                        username, 
+                        datetime, 
+                        content, 
+                        commentid 
+                    FROM comments a 
+                    JOIN users b ON b.id = a.userid 
+                    ORDER BY datetime ASC";
+
+    $resultPost = $db->query($queryPost);
+    $resultComment = $db->query($queryComment);
+
+    // echo mysqli_get_server_info($db);
+    // $test = $resultPost->fetch_assoc();
+    // var_dump($result);
+    // echo "<br>";
+
+    while($row = $resultPost->fetch_assoc()){
+        // var_dump($row);
+        array_push($postdata, $row);
+    } 
+    while($row = $resultComment->fetch_assoc()){
+        // print_r($row);
+        // echo "<br>";
+        array_push($commentdata, $row);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,8 +110,8 @@
             </div>
         </div>
         <div class="postcontent">
-            <b><?=htmlspecialchars($d["title"])?></b>
-            <p><?=htmlspecialchars($d["content"])?></p>
+            <p><?=$d["title"]?></p> <!-- //anticipate1 -->
+            <p><?=$d["content"]?></p>
         </div>
         <?php
             $commentlist = [];
